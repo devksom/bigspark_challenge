@@ -27,7 +27,7 @@ resource "aws_security_group" "bs_websg" {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] #replace it with your ip address
+    cidr_blocks = ["0.0.0.0/0"] #Open to anyone
   }
   
 
