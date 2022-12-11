@@ -49,7 +49,7 @@ resource "aws_subnet" "prv_sub1" {
   availability_zone       = "us-west-2c"
   map_public_ip_on_launch = false
 tags = {
-    Project = "demo-assignment"
+
     Name = "private_subnet1" 
  }
 }
@@ -60,7 +60,7 @@ resource "aws_subnet" "prv_sub2" {
   availability_zone       = "us-west-2a"
   map_public_ip_on_launch = false
 tags = {
-    Project = "demo-assignment"
+  
     Name = "private_subnet1" 
  }
 }
@@ -73,7 +73,7 @@ resource "aws_route_table" "pub_sub1_rt" {
     gateway_id = aws_internet_gateway.igw.id
    }
     tags = {
-    Project = "demo-assignment"
+  
     Name = "public subnet route table" 
  }
 }
@@ -137,7 +137,7 @@ resource "aws_security_group" "webserver_sg" {
   }
   tags = {
     Name = "webserver_sg"
-    Project = "demo-assignment"
+  
   }
 }
 # Create Auto Scaling Group
