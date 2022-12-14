@@ -39,7 +39,7 @@ tags = {
  }
 }
 
-#Create Public Route Table
+#Create Route Table for subnet 1
 resource "aws_route_table" "prv_sub1_rt" {
   vpc_id = aws_vpc.bs-alb-vpc.id
   route {
@@ -58,6 +58,24 @@ resource "aws_route_table_association" "internet_for_prv_sub1" {
   subnet_id      = aws_subnet.prv_sub1.id
 }
 
+#Create Route Table for subnet 2
+resource "aws_route_table" "prv_sub2_rt" {
+  vpc_id = aws_vpc.bs-alb-vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+
+   }
+    tags = {
+  
+    Name = "route table" 
+ }
+}
+# Create route table association of private subnet2
+resource "aws_route_table_association" "internet_for_prv_sub2" {
+  route_table_id = aws_route_table.prv_sub2_rt.id
+  subnet_id      = aws_subnet.prv_sub2.id
+}
 
 # Create security group for load balancer
 resource "aws_security_group" "elb_sg" {
@@ -126,8 +144,8 @@ resource "aws_lb_target_group" "TG-tf" {
     interval            = 10
     path                = "/"
     port                = 80
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
     timeout             =3
     protocol            = "HTTP"
     matcher             = "200,202"
@@ -161,7 +179,7 @@ resource "aws_instance" "web1" {
   sudo yum update
   sudo yum install httpd -y
   sudo service httpd start
-  echo “I made it! This is is awesome 1!” > /var/www/html/index.html
+  echo "Hey, it's a me, WEB 1!" > /var/www/html/index.html
 EOF
 
 }
@@ -181,7 +199,7 @@ resource "aws_instance" "web2" {
   sudo yum update
   sudo yum install httpd -y
   sudo service httpd start
-  echo “I made it! This is is awesome 2!” > /var/www/html/index.html
+  echo "Hey, it's a me, WEB 2!" > /var/www/html/index.html
 EOF
 
 }
