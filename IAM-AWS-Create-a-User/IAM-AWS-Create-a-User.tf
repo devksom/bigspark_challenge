@@ -2,7 +2,7 @@
 #Create a group called admin and place it in the path called users for easy organisation
 resource "aws_iam_group" "bgspadminsgp" {
   name = "admin"
-  path = "/users/"
+ # path = "/users/"
 }
 
 #create an IAM user resource called bgspusers
